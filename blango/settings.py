@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -71,6 +72,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'blango.wsgi.application'
+
+REST_FRAMEWORK = {
+"DEFAULT_AUTHENTICATION_CLASSES": [
+"rest_framework.authentication.BasicAuthentication",
+"rest_framework.authentication.SessionAuthentication",
+"rest_framework.authentication.TokenAuthentication",
+]
+}
 
 
 # Database
@@ -127,10 +136,3 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ALLOWED_HOSTS = ['*']
-X_FRAME_OPTIONS = 'ALLOW-FROM ' + os.environ.get('CODIO_HOSTNAME') + '-8000.codio.io'
-CSRF_COOKIE_SAMESITE = None
-CSRF_TRUSTED_ORIGINS = [os.environ.get('CODIO_HOSTNAME') + '-8000.codio.io']
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SAMESITE = 'None'
-SESSION_COOKIE_SAMESITE = 'None'
